@@ -95,8 +95,6 @@ export default {
   background: #E74B37;
 }
 
- .v-content{
-   padding-top: 0!important;
- }
+ 
 </style>
 

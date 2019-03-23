@@ -1,19 +1,16 @@
 <template>
   <nav v-if="$route.path!='/login'">
     <v-toolbar flat app absolute class="elevation-0">
-      <v-toolbar-side-icon class="white--text" @click="drawer = !drawer"></v-toolbar-side-icon>
-        <v-flex xs3 class="mt-4">
-        <v-text-field solo label="Search" append-icon="search" class="mb-4"></v-text-field>
-        </v-flex>
+      <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
 
-      <v-btn flat color="white" router to="/login">
+      <v-btn flat router to="/login">
         <span>Logout</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
     </v-toolbar>
 
-    <v-navigation-drawer v-model="drawer" app class="light">
+    <v-navigation-drawer temporary v-model="drawer" app class="light">
       <v-toolbar flat>
           <div class="logo__container">
             <v-img :src="require('../assets/logo/proxyrelay_mini.png')"></v-img>
@@ -40,6 +37,7 @@ export default {
       drawer: false,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
+        { icon: "bubble_chart", text: "Online Shop", route: "/shop" },
         { icon: "bubble_chart", text: "Badges", route: "/statistics" }
       ]
     };
@@ -48,9 +46,7 @@ export default {
 </script>
 
 <style>
-.v-toolbar {
-  background: transparent !important;
-}
+
 .logo__container {
   width: 75%;
 }

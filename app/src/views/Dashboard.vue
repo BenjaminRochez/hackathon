@@ -1,8 +1,7 @@
 <template>
   <div class="oa-experimentation">
     <Header>
-         <v-breadcrumbs :items="items" divider=">"></v-breadcrumbs>
-      <v-container fluid grid-list-xl>
+      <v-container grid-list-xl>
         <v-layout>
           <v-flex xs4 v-for="exp in experimentations" :key="exp.title">
             <v-card flat class="pa-4 rounded-card">
@@ -49,6 +48,9 @@ export default {
   },
   data() {
     return {
+        items: {
+            
+        }
     };
   },
   methods: {}
