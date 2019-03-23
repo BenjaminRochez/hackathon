@@ -12,13 +12,12 @@
             <div class="oa-login__form-wrapper text-md-left">
               <div class="oa-login__header">
                 <router-link class="oa-login__logo" to="/">
-                  <h1>
-                    <span>Proxy</span>
-                    <span class="font-weight-light">Relay</span>
-                  </h1>
+                  <div class="logo__container">
+                      <v-img :src="require('../assets/logo/proxyrelay.png')"></v-img>
+                  </div>
                 </router-link>
               </div>
-              <v-form ref="form">
+              <v-form ref="form" class="mt-5">
                 <v-text-field label="Email adress" append-icon="alternate_email" class="mb-4"></v-text-field>
                 <v-text-field label="Password" append-icon="visibility" class="mb-1"></v-text-field>
 
@@ -47,6 +46,10 @@ export default {};
 </script>
 
 <style>
+.logo__container{
+    width: 60%;
+    margin: 0 auto;
+}
 .pr-login__illu {
   width: 100%;
   height: 100vh;

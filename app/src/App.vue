@@ -30,7 +30,6 @@ export default {
   position: relative;
 }
  
-
 /* Shared */
 .loginBtn {
   box-sizing: border-box;
