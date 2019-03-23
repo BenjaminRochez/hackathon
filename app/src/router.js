@@ -27,6 +27,11 @@ export default new Router({
       path: '/login-selector',
       name: 'selector',
       component: () => import(/* webpackChunkName: "about" */ './views/LoginSelector.vue')
-    }
+    },
+    {
+      path: '/Category',
+      name: 'Category',
+      component: () => import(/* webpackChunkName: "about" */ './views/Category.vue')
+    },
   ]
 })
