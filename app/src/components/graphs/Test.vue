@@ -1,17 +1,17 @@
 <template>
   <div>
-    <canvas id="sales-chart"></canvas>
+    <canvas id="planet-chart"></canvas>
   </div>
 </template>
 <script>
 import Chart from 'chart.js';
 
-import salesData from "../../charts/sales-data.js";
+import planetChartData from "../../charts/test-data.js";
 
 export default {
   data() {
     return {
-      salesData: salesData
+      planetChartData: planetChartData
     };
   },
 
@@ -26,7 +26,7 @@ export default {
     }
   },
   mounted() {
-    this.createChart("sales-chart", this.salesData);
+    this.createChart("planet-chart", this.planetChartData);
   }
 };
 </script>
