@@ -4,6 +4,11 @@
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
 
+      <v-flex class="mt-4 mb-3">
+        <Popup @projectAdded="openSnack()" /> 
+        
+      </v-flex>
+
       <v-btn flat router to="/login">
         <span>Logout</span>
         <v-icon right>exit_to_app</v-icon>
@@ -31,14 +36,16 @@
 </template>
 
 <script>
+import Popup from './Popup.vue';
 export default {
+  components: { Popup },
   data() {
     return {
       drawer: false,
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
         { icon: "bubble_chart", text: "Online Shop", route: "/shop" },
-        { icon: "bubble_chart", text: "Badges", route: "/statistics" }
+        { icon: "bubble_chart", text: "Badges", route: "/badges" }
       ]
     };
   }

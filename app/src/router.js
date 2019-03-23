@@ -38,5 +38,16 @@ export default new Router({
       name: 'Dashboard',
       component: () => import(/* webpackChunkName: "about" */ './views/Dashboard.vue')
     },
+    {
+      path: '/Badges',
+      name: 'Badges',
+      component: () => import(/* webpackChunkName: "about" */ './views/Badges.vue')
+    },
+
+    {
+      path: '/product/:product_slug',
+      name: 'Product',
+      component: () => import(/* webpackChunkName: "about" */ './views/Product.vue')
+    },
   ]
 })
