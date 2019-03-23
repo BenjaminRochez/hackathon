@@ -33,5 +33,10 @@ export default new Router({
       name: 'Category',
       component: () => import(/* webpackChunkName: "about" */ './views/Category.vue')
     },
+    {
+      path: '/Dashboard',
+      name: 'Dashboard',
+      component: () => import(/* webpackChunkName: "about" */ './views/Dashboard.vue')
+    },
   ]
 })
