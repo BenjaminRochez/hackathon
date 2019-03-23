@@ -33,12 +33,13 @@
           <div>
             <h3>Cold Chain Graph</h3>
             <v-alert class="mb-3" :value="true" type="info">
-              <h3>Le saviez vous ?</h3>Selon le type de produits réfrigérés, il y a rupture de la chaîne du froid dès que la température indiquée sur l'étiquette est dépassée. Selon la réglementation, les températures des produits réfrigérés varient entre + 2° C et + 8° C. La rupture de cette chaîne implique des risques d'intoxication alimentaire.
+              <h3>Le saviez vous ?</h3>Selon le type de produits réfrigérés, il y a rupture de la chaîne du froid dès que la température indiquée sur l'étiquette est dépassée. Selon la réglementation, les températures des produits réfrigérés varient entre + 2° C et + 8° C. La rupture de cette chaîne implique des risques d'intoxication alimentaire. 
+              <br>Les producteurs partenaires <b>ProxyRelay</b> fournissent,  en toute transparence, les informations relative à la chaine de froid directement avec vous, prouvant un gage de qualité supérieur!
             </v-alert>
             <Froid/>
           </div>
           <div>
-            <Map location="Rue des rentiers, 101, La louvière, Belgium"/>
+            <Map :location="product.location" />
           </div>
         </v-flex>
       </v-layout>
@@ -64,7 +65,7 @@ export default {
       product: {
         image: "tomate.jpg",
         productor: "Producteur",
-        location: "Location",
+        location: "Rue des rentiers, 101, La louvière, Belgium",
         title: "Tomate",
         infos: "",
         price_net: 3,

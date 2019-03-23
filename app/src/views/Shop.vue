@@ -1,6 +1,6 @@
 <template>
   <div class="pr-category">
-      <ShopHeader />
+    <ShopHeader/>
     <v-container align-content-center grid-list-xl fluid>
       <v-layout>
         <v-flex xs3>
@@ -9,7 +9,7 @@
         <v-flex xs9>
           <v-layout row wrap>
             <v-flex xs3 v-for="item in items" :key="item.id">
-              <v-card>
+              <v-card @click="navigate(item.id)">
                 <v-container>
                   <v-layout>
                     <v-img :src="require(`../assets/products/${item.image}`)"></v-img>
@@ -34,6 +34,7 @@
 <script>
 import Navigator from "../components/Navigator.vue";
 import ShopHeader from "../components/ShopHeader.vue";
+import router from '../router'
 export default {
   components: {
     Navigator,
@@ -41,6 +42,7 @@ export default {
   },
   data() {
     return {
+      page: 1,
       items: [
         {
           id: 1,
@@ -74,6 +76,12 @@ export default {
         }
       ]
     };
+  },
+
+  methods: {
+    navigate(slug) {
+      this.$router.push( `/product/${slug}` );
+    }
   }
 };
 </script>

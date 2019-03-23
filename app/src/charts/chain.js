@@ -1,9 +1,20 @@
+var dataArr = [];
+
+function getRandomData(){
+    var i = 0;
+    for(i=0; i<14; i++){
+        var e = (Math.random() * 1.5) +1; 
+        dataArr.push(e);
+    }
+}
+
+getRandomData();
 export const chainChartData = {
     type: 'line',
     data: {
         labels: ["12:00", "16:00", "20:00", "00:00", "04:00", "08:00", "12:00", "16:00", "20:00", "00:00", "04:00", "08:00", "12:00"],
         datasets: [{
-            data: [2.5, 2.6, 2.7, 2.4, 2.2, 2, 2.5, 2.8, 2.6, 2.7, 2.4, 2.2, 2, 2.5],
+            data: dataArr,
             label: "Chaine du froid",
             borderColor: "rgba(186, 231, 128, 1)",
             fill: true,
