@@ -2,7 +2,9 @@
   <div class="login">
     <v-layout>
       <v-flex xs6>
-        <div class="pr-login__illu"></div>
+          <div class="pr-relative">
+            <v-img class="pr-login__illu" :src="require('../assets/login.jpg')"></v-img>
+        </div>
       </v-flex>
       <v-flex xs6>
         <div class="pr-login__form">
@@ -18,10 +20,10 @@
             <v-form ref="form">
               <v-text-field label="Email adress" append-icon="alternate_email" class="mb-4"></v-text-field>
               <v-text-field
-                :type="pswVisibility"
+                
                 label="Password"
                 append-icon="visibility"
-                @click:append="togglePsw()"
+                
                 class="mb-5"
               ></v-text-field>
 
@@ -45,6 +47,21 @@
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>
+
+<style>
+    .pr-login__illu{
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+    .pr-relative{
+        position: relative;
+    }
+</style>
+
 
