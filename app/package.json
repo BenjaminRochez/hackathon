@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "chart.js": "^2.8.0",
+    "firebase": "^5.9.1",
+    "slugify": "^1.3.4",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vuetify": "^1.5.5"

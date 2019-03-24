@@ -1,7 +1,7 @@
 <template>
     <div>
-        <BadgeHeader />
         <v-container align-content-center grid-list-xl>
+            <h1>Vos badges</h1>
             <v-layout row wrap>
                 <v-flex xs2 v-for="badge in badges" :key="badge.id">
                     <v-img :class="badge.status" :src="require(`../assets/badges/${badge.img}`)"></v-img>
@@ -13,11 +13,7 @@
 </template>
 
 <script>
-import BadgeHeader from '../components/BadgeHeader.vue';
 export default {
-    components:{
-        BadgeHeader
-    },
     data(){
         return{
             badges: [

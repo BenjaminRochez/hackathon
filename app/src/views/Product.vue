@@ -10,11 +10,11 @@
         <v-flex xs9>
           <v-layout>
             <v-flex xs4>
-              <v-img :src="require(`../assets/products/${product.image}`)"></v-img>
+              <v-img :src="require(`../assets/products/${product.image_url}`)"></v-img>
             </v-flex>
             <v-flex xs8>
               <div>
-                <h2 class="headline">{{product.title}}</h2>
+                <h2 class="headline">{{product.name}}</h2>
               </div>
 
               <div>
@@ -27,26 +27,54 @@
                 <span>{{product.location}}</span>
               </div>
 
-              <div></div>
+              <div>
+                <h4>Price</h4>
+                <span>{{product.price}}€</span>
+              </div>
+
+              <v-btn class="primary ml-0">
+                Ajouter au panier
+                <v-icon right dark>cloud</v-icon>
+              </v-btn>
             </v-flex>
           </v-layout>
-          <div>
-            <h3>Cold Chain Graph</h3>
-            <v-alert class="mb-3" :value="true" type="info">
-              <h3>Le saviez vous ?</h3>Selon le type de produits réfrigérés, il y a rupture de la chaîne du froid dès que la température indiquée sur l'étiquette est dépassée. Selon la réglementation, les températures des produits réfrigérés varient entre + 2° C et + 8° C. La rupture de cette chaîne implique des risques d'intoxication alimentaire. 
-              <br>Les producteurs partenaires <b>ProxyRelay</b> fournissent,  en toute transparence, les informations relative à la chaine de froid directement avec vous, prouvant un gage de qualité supérieur!
-            </v-alert>
-            <Froid/>
-          </div>
-          <div>
-            <Map :location="product.location" />
-          </div>
+          <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
+            <v-tab key="1">Chain Graph</v-tab>
+            <v-tab key="1">Maps</v-tab>
+            <v-tab key="1">Comments</v-tab>
+            <v-tab-item>
+              <v-card flat  class="pl-5 pr-5 pt-2 pb-2">
+                <div>
+                  <h3>Cold Chain Graph</h3>
+                  <v-alert class="mb-3" :value="true" type="info">
+                    <h3>Le saviez vous ?</h3>Selon le type de produits réfrigérés, il y a rupture de la chaîne du froid dès que la température indiquée sur l'étiquette est dépassée. Selon la réglementation, les températures des produits réfrigérés varient entre + 2° C et + 8° C. La rupture de cette chaîne implique des risques d'intoxication alimentaire.
+                    <br>Les producteurs partenaires
+                    <b>ProxyRelay</b> fournissent, en toute transparence, les informations relative à la chaine de froid directement avec vous, prouvant un gage de qualité supérieur!
+                  </v-alert>
+                  <Froid/>
+                </div>
+              </v-card>
+            </v-tab-item>
+
+            <v-tab-item >
+              <v-card flat class="pl-5 pr-5 pt-2 pb-2">
+                <div>
+                  <Map :location="product.location"/>
+                </div>
+              </v-card>
+            </v-tab-item>
+            <v-tab-item>
+              <v-card flat  class="pl-5 pr-5 pt-2 pb-2"></v-card>
+            </v-tab-item>
+          </v-tabs>
         </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 <script>
+import db from "@/main.js";
+
 import ShopHeader from "../components/ShopHeader.vue";
 import Navigator from "../components/Navigator.vue";
 import Froid from "../components/graphs/Froid.vue";
@@ -62,17 +90,21 @@ export default {
   },
   data() {
     return {
-      product: {
-        image: "tomate.jpg",
-        productor: "Producteur",
-        location: "Rue des rentiers, 101, La louvière, Belgium",
-        title: "Tomate",
-        infos: "",
-        price_net: 3,
-        price_kg: 4
-      }
+      product: {}
     };
   },
+  created() {
+    let ref = db
+      .collection("product")
+      .where("slug", "==", this.$route.params.product_slug);
+    ref.get().then(snapshot => {
+      console.log(snapshot);
+      snapshot.forEach(doc => {
+        console.log(doc.data());
+        this.product = doc.data();
+      });
+    });
+  }
   /*methods: {
     geolocation() {
       var zip = prompt('What is your zip code ?');

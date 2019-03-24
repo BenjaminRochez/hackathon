@@ -1,20 +1,21 @@
 <template>
   <div class="pr-category">
     <ShopHeader/>
-    <v-container align-content-center grid-list-xl fluid>
+    <v-container align-content-center grid-list-xl>
       <v-layout>
         <v-flex xs3>
           <Navigator/>
         </v-flex>
         <v-flex xs9>
           <v-layout row wrap>
-            <v-flex xs3 v-for="item in items" :key="item.id">
-              <v-card @click="navigate(item.id)">
+            <v-flex xs4 v-for="item in products" :key="item.id">
+              <v-card class="hover" @click="navigate(item.slug)">
                 <v-container>
                   <v-layout>
-                    <v-img :src="require(`../assets/products/${item.image}`)"></v-img>
+                    <v-img :src="require(`../assets/products/${item.image_url}`)"></v-img>
                   </v-layout>
                 </v-container>
+
                 <v-card-title primary-title class="text-sm-center">
                   <h3 class="headline mb-0 pr-headline">{{item.name}}</h3>
                   <p>{{item.price}}€/pièce</p>
@@ -32,9 +33,9 @@
 </template>
 
 <script>
+import db from '@/main.js';
 import Navigator from "../components/Navigator.vue";
 import ShopHeader from "../components/ShopHeader.vue";
-import router from '../router'
 export default {
   components: {
     Navigator,
@@ -43,44 +44,27 @@ export default {
   data() {
     return {
       page: 1,
-      items: [
-        {
-          id: 1,
-          name: "Tomates",
-          image: "tomate.jpg",
-          price: "5"
-        },
-        {
-          id: 2,
-          name: "Tomates",
-          image: "tomate.jpg",
-          price: "1"
-        },
-        {
-          id: 3,
-          name: "Tomates",
-          image: "tomate.jpg",
-          price: "2"
-        },
-        {
-          id: 4,
-          name: "Tomates",
-          image: "tomate.jpg",
-          price: "2"
-        },
-        {
-          id: 5,
-          name: "Tomates",
-          image: "tomate.jpg",
-          price: "4"
-        }
-      ]
+      products: []
     };
+  },
+  created() {
+    db.collection("product").onSnapshot(res => {
+      const changes = res.docChanges();
+      changes.forEach(change => {
+        if (change.type === "added") {
+          this.products.push({
+            // spread the properties
+            ...change.doc.data(),
+            id: change.doc.id
+          });
+        }
+      });
+    });
   },
 
   methods: {
     navigate(slug) {
-      this.$router.push( `/product/${slug}` );
+      this.$router.push(`/product/${slug}`);
     }
   }
 };
@@ -90,6 +74,11 @@ export default {
 <style>
 .pr-headline {
   width: 100%;
+}
+
+.hover:hover {
+  cursor: pointer;
+  opacity: 0.7;
 }
 </style>
 
