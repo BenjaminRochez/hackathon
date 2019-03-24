@@ -8,7 +8,7 @@ import gmapsInit from '../utils/gmap';
 export default {
   name: 'Map',
     props: ['location'], 
-  async mounted() {
+  async created() {
 
     try {
         // TODO ADD LOCATIONS
@@ -16,7 +16,7 @@ export default {
       const google = await gmapsInit();
       const geocoder = new google.maps.Geocoder();
       const map = new google.maps.Map(this.$el);
-
+      console.log(this.$props.location);
       geocoder.geocode({ address: this.$props.location }, (results, status) => {
         if (status !== 'OK' || !results[0]) {
           throw new Error(status);

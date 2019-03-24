@@ -1,14 +1,20 @@
 <template>
   <div class="pr-category">
-    <ShopHeader/>
+   <div class="oa-shopheader">
+        <v-container>
+            <v-layout>
+                <v-text-field solo label="Search" append-icon="search" v-model="filterProd"></v-text-field>
+            </v-layout>
+        </v-container>
+    </div>
     <v-container align-content-center grid-list-xl>
       <v-layout>
         <v-flex xs3>
-          <Navigator/>
+          <Navigator />
         </v-flex>
         <v-flex xs9>
           <v-layout row wrap>
-            <v-flex xs4 v-for="item in products" :key="item.id">
+            <v-flex xs4 v-for="item in filteredProduct" :key="item.id">
               <v-card class="hover" @click="navigate(item.slug)">
                 <v-container>
                   <v-layout>
@@ -26,7 +32,7 @@
         </v-flex>
       </v-layout>
       <div class="text-xs-right">
-        <v-pagination v-model="page" :length="6"></v-pagination>
+        <!--<v-pagination v-model="page" :length="6"></v-pagination>-->
       </div>
     </v-container>
   </div>
@@ -44,9 +50,21 @@ export default {
   data() {
     return {
       page: 1,
-      products: []
+      products: [],
+      filterProd: '',
     };
   },
+  computed: {
+      filteredProduct(){
+        if(this.filterProd){
+          return this.products.filter(product =>{
+          return product.name.toLowerCase().includes(this.filterProd);
+         })
+        }else{
+          return this.products;
+        }     
+      }
+    },
   created() {
     db.collection("product").onSnapshot(res => {
       const changes = res.docChanges();

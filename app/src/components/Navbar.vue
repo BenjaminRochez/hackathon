@@ -6,6 +6,9 @@
 
       <v-flex class="mt-4 mb-3">
         <Popup @projectAdded="openSnack()"/>
+        <router-link :to="{name: 'relay'}">
+          <v-btn class="secondary">Find a relay!</v-btn>
+        </router-link>
       </v-flex>
       <v-btn v-if="this.currUser != ''" flat color="grey" @click="logout()">
         <span>Sign Out</span>
@@ -34,14 +37,14 @@
 </template>
 
 <script>
-import firebase from 'firebase'
+import firebase from "firebase";
 import Popup from "./Popup.vue";
 export default {
   components: { Popup },
   data() {
     return {
       drawer: false,
-      currUser: '',
+      currUser: "",
       links: [
         { icon: "dashboard", text: "Dashboard", route: "/dashboard" },
         { icon: "bubble_chart", text: "Online Shop", route: "/shop" },
@@ -50,28 +53,30 @@ export default {
     };
   },
   methods: {
-    logout(){
-            firebase.auth().signOut().then(() =>{
-                this.$router.replace('login');
-            })
-        },
-  },
-  created(){
-        if(firebase.auth().currentUser){
-            this.currUser = firebase.auth().currentUser.email;
-        } else {
-            this.currUser = ''
-        }
-    },
-    watch:{
-        $route (to, from){
-        if(from.name === 'login' && to.name === 'dashboard'){
-            this.openWelcome();
-            this.currUser = firebase.auth().currentUser.email;
-        }
+    logout() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          this.$router.replace("login");
+        });
     }
-}
-}
+  },
+  created() {
+    if (firebase.auth().currentUser) {
+      this.currUser = firebase.auth().currentUser.email;
+    } else {
+      this.currUser = "";
+    }
+  },
+  watch: {
+    $route(to, from) {
+      if (from.name === "login" && to.name === "dashboard") {
+        this.currUser = firebase.auth().currentUser.email;
+      }
+    }
+  }
+};
 </script>
 
 <style>

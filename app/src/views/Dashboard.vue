@@ -56,6 +56,7 @@ import Header from "../components/Header.vue";
 import Comments from "../components/CommentList.vue";
 import Stock from "../components/Stock.vue";
 export default {
+  name: 'Dashboard',
   components: {
     Header,
     Sales,

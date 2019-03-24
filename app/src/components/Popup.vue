@@ -64,7 +64,7 @@ export default {
                 }).then(()=>{
                     // when pushed to the db, redirect to the index
                     this.dialog = false;
-                    this.$router.push('/dashboard')
+                    this.$router.push('/shop')
                 }).catch(err =>{
                     console.log(err)
                 })

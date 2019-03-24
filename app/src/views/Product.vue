@@ -1,13 +1,8 @@
 <template>
   <div>
-    <ShopHeader/>
-
     <v-container align-content-center grid-list-xl>
       <v-layout>
-        <v-flex xs3>
-          <Navigator/>
-        </v-flex>
-        <v-flex xs9>
+        <v-flex xs12>
           <v-layout>
             <v-flex xs4>
               <v-img :src="require(`../assets/products/${product.image_url}`)"></v-img>
@@ -38,10 +33,17 @@
               </v-btn>
             </v-flex>
           </v-layout>
-          <v-tabs v-model="active" color="cyan" dark slider-color="yellow">
-            <v-tab key="1">Chain Graph</v-tab>
+          <v-tabs  color="cyan" dark slider-color="yellow">
             <v-tab key="1">Maps</v-tab>
-            <v-tab key="1">Comments</v-tab>
+            <v-tab key="2">Chain Graph</v-tab>
+            <v-tab key="3">Comments</v-tab>
+            <v-tab-item >
+              <v-card flat class="pl-5 pr-5 pt-2 pb-2">
+                <div class="mapounet">
+                  <Map :location="product.location"/>
+                </div>
+              </v-card>
+            </v-tab-item>
             <v-tab-item>
               <v-card flat  class="pl-5 pr-5 pt-2 pb-2">
                 <div>
@@ -56,54 +58,44 @@
               </v-card>
             </v-tab-item>
 
-            <v-tab-item >
-              <v-card flat class="pl-5 pr-5 pt-2 pb-2">
-                <div>
-                  <Map :location="product.location"/>
-                </div>
-              </v-card>
-            </v-tab-item>
+            
             <v-tab-item>
               <v-card flat  class="pl-5 pr-5 pt-2 pb-2"></v-card>
             </v-tab-item>
           </v-tabs>
+          
         </v-flex>
       </v-layout>
     </v-container>
   </div>
 </template>
 <script>
-import db from "@/main.js";
-
-import ShopHeader from "../components/ShopHeader.vue";
-import Navigator from "../components/Navigator.vue";
+import db from "../main.js";
 import Froid from "../components/graphs/Froid.vue";
 import Map from "../components/Map.vue";
 
 export default {
   name: "Product",
   components: {
-    ShopHeader,
-    Navigator,
     Froid,
     Map
   },
   data() {
     return {
-      product: {}
+      product: {},
     };
   },
   created() {
     let ref = db
       .collection("product")
       .where("slug", "==", this.$route.params.product_slug);
-    ref.get().then(snapshot => {
-      console.log(snapshot);
-      snapshot.forEach(doc => {
-        console.log(doc.data());
-        this.product = doc.data();
-      });
-    });
+        ref.get().then(snapshot => {
+          console.log(snapshot);
+          snapshot.forEach(doc => {
+            console.log(doc.data());
+            this.product = doc.data();
+          });
+        });
   }
   /*methods: {
     geolocation() {
@@ -120,3 +112,4 @@ export default {
   }*/
 };
 </script>
+

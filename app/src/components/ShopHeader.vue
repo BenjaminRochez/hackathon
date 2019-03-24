@@ -2,12 +2,19 @@
     <div class="oa-shopheader">
         <v-container>
             <v-layout>
-                <v-text-field solo label="Search" append-icon="search" ></v-text-field>
+                <v-text-field solo label="Search" append-icon="search" :v-model="props.filteredProd"></v-text-field>
             </v-layout>
         </v-container>
         
     </div>
 </template>
+
+<script>
+export default {
+    props: ['filteredProd']
+}
+</script>
+
 
 <style>
 .oa-shopheader{

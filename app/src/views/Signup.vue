@@ -47,3 +47,9 @@ export default {
     }
 }
 </script>
+
+<style>
+nav{
+    display: none;
+}
+</style>

@@ -58,41 +58,6 @@
               { title: 'Poires' },
               { title: 'Banane' }
             ]
-          },
-          {
-            action: 'school',
-            title: 'Boucherie',
-            items: [
-              { title: 'List Item' }
-            ]
-          },
-          {
-            action: 'directions_run',
-            title: 'Family',
-            items: [
-              { title: 'List Item' }
-            ]
-          },
-          {
-            action: 'healing',
-            title: 'Health',
-            items: [
-              { title: 'List Item' }
-            ]
-          },
-          {
-            action: 'content_cut',
-            title: 'Office',
-            items: [
-              { title: 'List Item' }
-            ]
-          },
-          {
-            action: 'local_offer',
-            title: 'Promotions',
-            items: [
-              { title: 'List Item' }
-            ]
           }
         ]
       }
