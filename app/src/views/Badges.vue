@@ -28,7 +28,7 @@ export default {
                     id: 2,
                     name: '',
                     img: '2.png',
-                    status: "inactive"
+                    status: "active"
                 },
 
                 {

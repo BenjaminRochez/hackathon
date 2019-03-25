@@ -6,10 +6,10 @@
                 <v-spacer></v-spacer>
                 <v-flex xs-6>
                     <v-card class="mb-3 px-3 py-3" >
-                        <v-form class="mb-3">
+                        <v-form class="mb-3" @submit.prevent="signup">
                             <v-text-field label="Email" v-model="email"></v-text-field>
                             <v-text-field type="password" label="Password" v-model="password"></v-text-field>
-                            <v-btn @click="signUp()" class="success ml-0" flat>Signup</v-btn>
+                            <v-btn type="submit" @click="signUp()" class="success ml-0" flat>Signup</v-btn>
                         </v-form>
                         <p>Already have an account ? You can <router-link to="/login">login</router-link></p>
                     </v-card>
@@ -49,7 +49,4 @@ export default {
 </script>
 
 <style>
-nav{
-    display: none;
-}
 </style>

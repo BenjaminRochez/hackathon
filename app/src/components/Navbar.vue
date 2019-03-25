@@ -1,6 +1,6 @@
 <template>
   <nav v-if="$route.path!='/login'">
-    <v-toolbar flat app absolute class="elevation-0">
+    <v-toolbar flat app absolute class="elevation-0" v-if="$route.path!='/signup'">
       <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
       <v-spacer></v-spacer>
 
@@ -10,7 +10,7 @@
           <v-btn class="secondary">Find a relay!</v-btn>
         </router-link>
       </v-flex>
-      <v-btn v-if="this.currUser != ''" flat color="grey" @click="logout()">
+      <v-btn flat color="grey" @click="logout()">
         <span>Sign Out</span>
         <v-icon right>exit_to_app</v-icon>
       </v-btn>
